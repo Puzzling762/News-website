@@ -1,11 +1,10 @@
 const API_KEY = "8cca0844d1514c199c58a6ca5738ca0f";
 const url = "https://newsapi.org/v2/everything?q=";
-const corsProxy = "https://cors-anywhere.herokuapp.com/";
 
 window.addEventListener('load', () => fetchNews("India"));
 
 async function fetchNews(query) {
-    const res = await fetch(`${corsProxy}${url}${query}&apiKey=${API_KEY}`);
+    const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
     const data = await res.json();
     bindData(data.articles);
 }
@@ -17,7 +16,7 @@ function bindData(articles) {
 
     articles.forEach(article => {
         if (!article.urlToImage) return;
-        const cardClone = newsCardTemplate.content.cloneNode(true); 
+        const cardClone = newsCardTemplate.content.cloneNode(true);
         fillDataInCard(cardClone, article);
         cardsContainer.appendChild(cardClone);
     });
